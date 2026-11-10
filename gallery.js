@@ -60,12 +60,12 @@ let encryptedPayload;
 async function unlockGallery(passphrase) {
  if(!crypto.subtle)throw Error("请使用新版 Chrome 或 Edge，通过网站链接打开。");
  if(!encryptedPayload) {
-  const response=await fetch("./payload.data?v=ccbb8cee2d214f67",{credentials:"omit"});
+  const response=await fetch("./payload.data?v=e4e96255e9717618",{credentials:"omit"});
   if(!response.ok)throw Error("图稿包加载失败，请稍后重试。");
   encryptedPayload=new Uint8Array(await response.arrayBuffer());
  }
  const payload=encryptedPayload;
- if(payload.length<50||new TextDecoder().decode(payload.slice(0,6))!=="GNGP1\0")throw Error("图稿包格式无效，请刷新页面。");
+ if(payload.length<50||new TextDecoder().decode(payload.slice(0,6))!=="BDGP1\0")throw Error("图稿包格式无效，请刷新页面。");
  const material=await crypto.subtle.importKey("raw",new TextEncoder().encode(passphrase),"PBKDF2",false,["deriveKey"]);
  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:payload.slice(6,22),iterations:600000,hash:"SHA-256"},material,{name:"AES-GCM",length:256},false,["decrypt"]);
  let plain;
