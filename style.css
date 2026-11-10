@@ -11,3 +11,4 @@ main{min-width:0;padding:0 36px}.topbar{height:70px;display:flex;justify-content
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
 #unlock-form{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0}#passphrase{min-height:44px;max-width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:4px}#unlock{min-height:44px;padding:8px 20px;border:0;border-radius:4px;background:var(--green);color:#fff}
+.image-dialog::after{content:"GNG · 内部评审 · 请勿外传";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:clamp(16px,3vw,28px);font-weight:600;color:rgba(255,255,255,.46);text-shadow:0 1px 3px #30382c;pointer-events:none;white-space:nowrap}.icon-slot.has-image::after{content:"GNG";position:absolute;bottom:1px;right:2px;font-size:9px;color:rgba(255,255,255,.65);text-shadow:0 1px 2px #222;pointer-events:none}.image-dialog img,.icon-slot img{-webkit-user-drag:none;user-select:none}
