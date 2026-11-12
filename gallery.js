@@ -105,7 +105,7 @@ async function unlockGallery(passphrase) {
   downloadProgress(0,0);
   downloadController=new AbortController();
   const options={credentials:"omit",signal:downloadController.signal};
-  const response=await fetch("./payload.data?v=1867ada63a121e38",options);
+  const response=await fetch("./payload.data?v=ce378928bc80fa61",options);
   if(!response.ok)throw Error("图稿包加载失败，请稍后重试。");
   let isManifest;
   let bytes=await readDownload(response,(loaded,piece)=>{if(isManifest===undefined&&piece.length)isManifest=piece[0]===123;if(isManifest===false)downloadProgress(loaded,Number(response.headers.get("Content-Length"))||0);});
@@ -120,7 +120,7 @@ async function unlockGallery(passphrase) {
    downloadProgress(0,expected);
    for(const part of manifest.parts) {
     if(accessClosed)throw Error("本次访问已关闭。");
-    const chunk=await fetch("./"+part.file+"?v=1867ada63a121e38",options);
+    const chunk=await fetch("./"+part.file+"?v=ce378928bc80fa61",options);
     if(!chunk.ok)throw Error("图稿分包加载失败，请稍后重试。");
     const content=await readDownload(chunk,loaded=>downloadProgress(total+loaded,expected));
     const digest=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",content)),b=>b.toString(16).padStart(2,"0")).join("");
