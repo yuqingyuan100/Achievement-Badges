@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src blob: data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>成就徽章 · 图稿展示</title>
-<link rel="stylesheet" href="./style.css?v=fd97976e0b8bff18"><script defer src="./gallery.js?v=2d641dc0ac9328a2"></script></head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src blob: data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="robots" content="noindex,nofollow,noarchive,noimageindex,noai,noimageai"><meta name="referrer" content="no-referrer"><title>成就徽章 · 图稿展示</title>
+<link rel="stylesheet" href="./style.css?v=f5d62882f24690ae"><script defer src="./gallery.js?v=af3330aa7576686a"></script></head>
 <body><div class="workspace"><aside class="sidebar">
 <a class="brand" href="#overview"><span>徽章<span class="brand-dot">.</span></span><small>ACHIEVEMENT</small></a>
 <div class="workspace-label">图稿评审</div><nav class="main-nav" aria-label="主要视图">
@@ -19,7 +19,7 @@
 <section class="page-heading"><div><div class="eyebrow">ACHIEVEMENT PRODUCTION</div><h1>成就徽章</h1></div><span class="phase-label">只读展示</span></section>
 <section class="metrics" aria-label="生产进度">
 <div class="metric"><span>成就组数</span><strong id="stat-groups">--</strong><small>组</small></div>
-<div class="metric"><span>需求图标</span><strong id="stat-icons">--</strong><small>枚</small></div>
+<div class="metric"><span>审阅档位</span><strong id="stat-icons">--</strong><small>枚</small></div>
 <div class="metric accent"><span>已有生成</span><strong id="stat-generated">--</strong><small>枚</small></div>
 <div class="metric"><span>当前选定</span><strong id="stat-selected">--</strong><small>枚</small></div>
 <div class="metric"><span>审核通过</span><strong id="stat-approved">--</strong><small>枚</small></div>
@@ -28,8 +28,8 @@
 <button class="selected" data-category="">全部</button><button data-category="战斗类">战斗</button><button data-category="财富类">财富</button><button data-category="社交类">社交</button><button data-category="隐藏类">隐藏</button></div>
 <div class="search-tools"><label class="search"><input id="search" type="search" placeholder="搜索成就" aria-label="搜索成就"></label>
 <select id="status" aria-label="进度筛选"><option value="">全部进度</option><option value="approved">审核通过</option><option value="needs_changes">需要调整</option><option value="selected">当前选定</option><option value="blocked">等待参考</option></select></div></div>
-<div class="list-caption"><span id="result-count"></span><span>铜 / 银 / 金 · 点击图稿查看原生 PNG</span></div>
-<table class="achievement-table"><thead><tr><th>成就</th><th>铜档</th><th>银档</th><th>金档</th><th>生成进度</th></tr></thead><tbody id="achievement-list"></tbody></table>
+<div class="list-caption"><span id="result-count"></span><span>点击图稿查看原生 PNG</span></div>
+<table class="achievement-table"><thead><tr><th>成就</th><th>第一档</th><th>第二档</th><th>第三档</th><th>生成进度</th></tr></thead><tbody id="achievement-list"></tbody></table>
 <div id="empty" class="empty-state" hidden>没有匹配的成就</div></section>
 <section id="workflow-view" class="view" hidden><div class="section-head"><h2>生产阶段</h2></div><ol id="stages" class="stage-list"></ol></section>
 <p class="muted">此页展示当前已选图稿与审核状态。选图、审核和评论在原工作区维护，内容更新后覆盖本页。</p>

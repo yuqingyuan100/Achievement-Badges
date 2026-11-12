@@ -12,3 +12,45 @@ main{min-width:0;padding:0 36px}.topbar{height:70px;display:flex;justify-content
 
 #unlock-form{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0}#passphrase{min-height:44px;max-width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:4px}#unlock{min-height:44px;padding:8px 20px;border:0;border-radius:4px;background:var(--green);color:#fff}
 .image-dialog img,.icon-slot img{-webkit-user-drag:none;user-select:none}
+/* Dark archive: warm charcoal, aged brass, muted wax red. */
+:root{--ink:#eee6d6;--muted:#b0a895;--line:#484032;--paper:#211f1b;--surface:#171715;--green:#d7b978;--green-light:#302a1d;--red:#d98e7b;--gold:#d7b978;--bronze:#b77a61;--silver:#b4b1a7;--rail:#101210}
+body{background:radial-gradient(ellipse at 75% 0,#30291c66,transparent 54%),var(--surface);color:var(--ink);font-size:14px}
+button,input,select,textarea{color:var(--ink)}
+.sidebar{background:linear-gradient(170deg,#1b1d18,#0f1110 64%);border-right:1px solid #51432a;padding-top:38px}
+.brand>span{font-family:"Noto Serif SC","Source Han Serif SC","SimSun",serif;font-size:34px;letter-spacing:3px;color:#eddaae}
+.brand-dot{color:#b08b4b}.brand small{color:#b39a68;letter-spacing:2.2px;font-size:8px}
+.workspace-label,.sidebar-project,.sync-caption{color:#9d927b}.nav-item{color:#c5bca8;border:1px solid transparent;min-height:46px}
+.nav-item.active{background:#44351f75;border-color:#72562e;color:#f0d8a5}.nav-item:hover{background:#322b20}.nav-count{color:#dac394}
+.sidebar-project{border-color:#39362b}.scope-label{color:#958d7b}.sync-block{color:#8c8779}.sync-block time{color:#d0c3a7}
+main{padding:0 30px}.topbar{border-color:#40382b;height:72px}.breadcrumb,.account{color:#b9ae99}.breadcrumb span{color:#726044}
+.page-heading{padding:31px 0 28px}.eyebrow{color:#b69b67;letter-spacing:2px;font-size:9px}
+.page-heading h1{font-family:"Noto Serif SC","Source Han Serif SC","SimSun",serif;font-size:30px;color:#f2e6cc;font-weight:650;letter-spacing:2px}
+.phase-label{background:#28241c;border-color:#5b4a2e;color:#d6bd88}.phase-label::before{background:#c5a467}
+.metrics{background:linear-gradient(110deg,#29251d,#201f1a);border-color:#5a4930;box-shadow:inset 0 1px #b7994822;padding:22px 0;margin-bottom:28px}
+.metric{border-color:#4a4030}.metric>span{color:#bfb39c}.metric strong{font-family:Georgia,"Times New Roman",serif;font-size:33px;color:#f0e0bc;font-weight:400}.metric.accent strong{color:#e6c47d}.metric.alert strong{color:#d7917e}.metric small{color:#a6997d}
+.category-tabs{border-color:#50432f;gap:4px}.category-tabs button{color:#b3aa96;min-height:44px}.category-tabs button.selected{color:#edcf90;border-color:#d6b16b}.category-tabs button:hover{color:#f3e5c9}
+.search,.search-tools select{background:#25231e;border-color:#554833;color:#d8cbb4}.search input{color:#e3d8c2;width:170px}.search input::placeholder{color:#aa9e88}.search-tools select{height:40px}.search{min-height:40px}
+.list-caption{color:#a69b85;padding-bottom:14px}.list-caption>span:last-child{display:block}
+.achievement-table{background:transparent;border-top:1px solid #6e5632}
+.achievement-table th{background:#2b261d;color:#c9b68e;border-color:#5b492f;padding:14px 12px;letter-spacing:1px;font-size:11px}
+.achievement-table th:first-child{width:24%}.achievement-table th:nth-child(2),.achievement-table th:nth-child(3),.achievement-table th:nth-child(4){width:20%}
+.achievement-table th:last-child{width:16%;text-align:left}.achievement-table td{padding:20px 12px;border-color:#3c362b;background:#211f1b80}
+.achievement-table tr:nth-child(even) td{background:#25221d80}.achievement-table tbody tr:hover td{background:#30291f}
+.achievement-table td:first-child>strong{font-family:"Noto Serif SC","Source Han Serif SC","SimSun",serif;font-size:17px;letter-spacing:1px;color:#eee0c2}
+.group-meta{color:#a79a82;font-size:11px;margin-top:9px}.tier-state{display:block;margin-top:9px;font-size:10px;color:#b9ad96}
+.icon-slot{width:clamp(104px,11.2vw,164px);height:clamp(104px,11.2vw,164px);border:1px dashed #54472f;border-radius:3px;background:#171815;color:#7d745e}
+.icon-slot.has-image{border:1px solid #75603c;background:#161715;box-shadow:0 3px 14px #0004;transition:border-color .15s,box-shadow .15s}
+.icon-slot.has-image:hover{border-color:#d7b978;box-shadow:0 0 0 1px #b28d4633,0 4px 18px #0006}.icon-slot img{object-fit:contain}
+.missing-tier{color:#766c59}.status-tag{background:#302c23;color:#c5b596;border:1px solid #52452f;padding:4px 8px;white-space:normal}
+.status-tag.generated{background:#34301f;color:#d4bf87;border-color:#625233}.status-tag.approved{background:#283024;color:#c1d1a7;border-color:#49573c}.status-tag.blocked{background:#38241f;color:#e0a08b;border-color:#674034}
+.row-progress{color:#a59a83;margin-top:8px}.page-footer{border-top:1px solid #40372a;color:#9e927c;margin-top:26px;padding:22px 0}
+.muted,.section-head>span{color:#b2a58c}.section-head h2{color:#e0c99e}.stage-list{border-color:#55452e}.stage-item{padding:16px;border-left:1px solid #55452e}.stage-item strong{display:block;color:#dec697;margin-bottom:8px}.stage-item span{font-size:12px;color:#b9aa8d}
+.notice{background:#29251d;color:#d5c5a5;border-color:#b69a61;margin-top:28px;padding:24px}.notice h1{font-family:"Noto Serif SC","Source Han Serif SC","SimSun",serif;font-size:25px;color:#ecd9b2;letter-spacing:1px}
+.error-notice{background:#33221e;border-color:#ba7f66;color:#e1ab96}#passphrase{background:#171815;color:#f0e5ce;border-color:#6c5736;font-size:16px}#unlock{background:#ae8a47;color:#17140e;font-weight:650;min-height:44px}
+.image-dialog{background:#211f19;color:#cabc9f;border:1px solid #82663a;border-radius:4px;width:min(1080px,96vw);max-height:96dvh;padding:40px 24px 15px;box-shadow:0 18px 80px #000b}
+.image-dialog>img{display:block;width:auto;max-width:100%;height:auto;max-height:calc(94dvh - 100px);object-fit:contain;margin:auto}
+.image-dialog::backdrop{background:#090b09d9}.image-dialog p{color:#c6b693;font-size:12px}.image-dialog .icon-button{color:#e7d5ae;min-width:44px;height:44px;right:5px;top:1px}.icon-button:hover{background:#4b3b25}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #e3c68d;outline-offset:4px}
+@media(max-width:1020px) and (min-width:761px){.workspace{grid-template-columns:170px minmax(0,1fr)}main{padding:0 20px}.sidebar{padding-inline:12px}.icon-slot{width:105px;height:105px}.achievement-table td{padding-inline:6px}.achievement-table th:first-child{width:22%}.achievement-table th:nth-child(2),.achievement-table th:nth-child(3),.achievement-table th:nth-child(4){width:20%}.achievement-table th:last-child{width:18%}.metric{padding-inline:12px}}
+@media(max-width:760px){body{font-size:16px}.sidebar{padding:20px 18px 0;border-bottom:1px solid #55432a}.brand>span{font-size:29px}.brand small{font-size:7px}.workspace-label{color:#b8a580}.nav-item.active{border-color:transparent;border-bottom-color:#d6b16b}.main-nav .nav-item:hover{background:transparent}main{padding:0 14px}.topbar{height:52px}.page-heading{padding:25px 0 20px}.page-heading h1{font-size:26px}.metrics{padding:0}.metric,.metric:first-child{padding:15px 12px}.metric:nth-child(-n+3){border-color:#4a4030}.metric strong{font-size:30px}.category-tabs button{font-size:12px}.search-tools{grid-template-columns:minmax(0,1fr) 112px}.search input{font-size:16px;width:100%}.list-caption{font-size:10px}.list-caption>span:last-child{display:none}.achievement-table tr{padding:18px 12px;gap:0 9px;background:#211f1b;border-color:#55452f}.achievement-table td{background:none!important;padding:0}.achievement-table td:first-child>strong{font-size:17px}.icon-slot{width:100%;height:auto;aspect-ratio:1;max-width:144px}.tier-cell::before{color:#b5a587}.tier-state{font-size:10px;line-height:1.4;min-height:28px}.achievement-table td:last-child{font-size:11px}.status-tag{font-size:10px;padding:4px 6px}.row-progress{font-size:10px;margin-left:7px}.image-dialog{padding:42px 9px 10px;width:98vw;max-height:97dvh}.image-dialog>img{max-height:calc(94dvh - 100px)}.notice{padding:19px 15px}.notice h1{font-size:22px}#unlock-form{display:grid;grid-template-columns:1fr;gap:9px}#passphrase{width:100%;min-width:0}.stage-item{border-left:0;border-bottom:1px solid #443a2b}.page-footer{margin-top:20px}}
+@media(prefers-reduced-motion:reduce){.icon-slot.has-image{transition:none}}
