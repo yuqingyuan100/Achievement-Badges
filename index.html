@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src blob: data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="robots" content="noindex,nofollow,noarchive,noimageindex,noai,noimageai"><meta name="referrer" content="no-referrer"><title>成就徽章 · 图稿展示</title>
-<link rel="stylesheet" href="./style.css?v=f5d62882f24690ae"><script defer src="./gallery.js?v=af3330aa7576686a"></script></head>
+<link rel="stylesheet" href="./style.css?v=b0d05a540107658c"><script defer src="./gallery.js?v=da417673d7a89312"></script></head>
 <body><div class="workspace"><aside class="sidebar">
 <a class="brand" href="#overview"><span>徽章<span class="brand-dot">.</span></span><small>ACHIEVEMENT</small></a>
 <div class="workspace-label">图稿评审</div><nav class="main-nav" aria-label="主要视图">
@@ -15,6 +15,10 @@
 <form id="unlock-form"><label for="passphrase">验证密码</label>
 <input id="passphrase" type="password" required minlength="6" placeholder="请输入验证密码" autocomplete="off" spellcheck="false" aria-describedby="access-message">
 <button id="unlock" type="submit">验证并进入</button></form>
+<div id="load-progress" class="load-progress" hidden>
+<div class="load-progress-heading"><span id="load-stage">准备加载图稿</span><span id="load-percent">0%</span></div>
+<progress id="load-bar" max="100" value="0" aria-label="图稿下载进度"></progress>
+<p id="load-detail">正在连接，请稍候…</p></div>
 <p>向分享此页的项目成员获取密码。图稿仅供项目内部评审。</p></div><div id="content" hidden>
 <section class="page-heading"><div><div class="eyebrow">ACHIEVEMENT PRODUCTION</div><h1>成就徽章</h1></div><span class="phase-label">只读展示</span></section>
 <section class="metrics" aria-label="生产进度">

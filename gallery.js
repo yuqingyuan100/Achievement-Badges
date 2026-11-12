@@ -65,6 +65,7 @@ function closeAccess(){
  downloadController?.abort();releaseImages(data);data=undefined;encryptedPayload=undefined;
  const dialog=$("#image-dialog");if(dialog.open)dialog.close();$("#large-image").removeAttribute("src");
  $("#content").replaceChildren();$("#content").hidden=true;$("#unlock-form").hidden=true;
+ $("#load-progress").hidden=true;
  $("#passphrase").value="";$("#passphrase").disabled=true;$("#unlock").disabled=true;
  $("#access").hidden=false;$("#access").classList.add("error-notice");
  $("#access-message").textContent="检测到自动化访问或批量取图，本次访问已关闭。";
@@ -82,26 +83,46 @@ for(const type of ["contextmenu","dragstart"])document.addEventListener(type,eve
  if(event.target.closest?.("img,.icon-slot.has-image,.image-dialog")){event.preventDefault();allowActivity("save");}
 });
 document.addEventListener("click",event=>{if(event.target.closest?.('a[download],a[href^="blob:"]')){event.preventDefault();closeAccess();}},true);
+function downloadProgress(loaded,total){
+ if(accessClosed)return;
+ $("#load-progress").hidden=false;$("#load-stage").textContent="正在加载图稿";
+ const bar=$("#load-bar"),mb=value=>(value/1048576).toFixed(1)+" MB";
+ if(total>0){bar.value=Math.min(100,loaded/total*100);$("#load-percent").textContent=Math.floor(bar.value)+"%";$("#load-detail").textContent="已加载 "+mb(loaded)+" / "+mb(total);}
+ else{bar.removeAttribute("value");$("#load-percent").textContent="准备中";$("#load-detail").textContent=loaded?"已加载 "+mb(loaded):"正在连接，请稍候…";}
+}
+async function readDownload(response,progress){
+ if(!response.body?.getReader){const bytes=new Uint8Array(await response.arrayBuffer());progress(bytes.length,bytes);return bytes;}
+ const reader=response.body.getReader(),pieces=[];let length=0;
+ try{while(true){const {done,value}=await reader.read();if(done)break;if(accessClosed)throw Error("本次访问已关闭。");pieces.push(value);length+=value.length;progress(length,value);}}
+ finally{reader.releaseLock();}
+ const bytes=new Uint8Array(length);let offset=0;for(const piece of pieces){bytes.set(piece,offset);offset+=piece.length;}return bytes;
+}
 async function unlockGallery(passphrase) {
  if(knownAutomation())closeAccess();if(accessClosed)throw Error("本次访问已关闭。");
  if(!crypto.subtle)throw Error("请使用新版 Chrome 或 Edge，通过网站链接打开。");
+ $("#access-message").textContent="首次加载图稿需要一些时间，请保持页面打开。";
  if(!encryptedPayload) {
+  downloadProgress(0,0);
   downloadController=new AbortController();
   const options={credentials:"omit",signal:downloadController.signal};
-  const response=await fetch("./payload.data?v=a225f038745713c8",options);
+  const response=await fetch("./payload.data?v=1867ada63a121e38",options);
   if(!response.ok)throw Error("图稿包加载失败，请稍后重试。");
-  let bytes=new Uint8Array(await response.arrayBuffer());
+  let isManifest;
+  let bytes=await readDownload(response,(loaded,piece)=>{if(isManifest===undefined&&piece.length)isManifest=piece[0]===123;if(isManifest===false)downloadProgress(loaded,Number(response.headers.get("Content-Length"))||0);});
   if(bytes[0]===123) {
    const manifest=JSON.parse(new TextDecoder().decode(bytes));
    if(manifest.format!=="badge-chunks-v1"||!Array.isArray(manifest.parts)||manifest.parts.length>32)throw Error("图稿分包目录无效。");
-   const parts=[];let total=0;
+   const parts=[];let total=0,expected=0;
+   for(const part of manifest.parts){
+    if(!/^payload-\d{2}\.data$/.test(part.file)||!Number.isInteger(part.bytes)||part.bytes<=0||expected+part.bytes>256*1024*1024)throw Error("图稿分包目录无效。");
+    expected+=part.bytes;
+   }
+   downloadProgress(0,expected);
    for(const part of manifest.parts) {
     if(accessClosed)throw Error("本次访问已关闭。");
-    $("#access-message").textContent="正在加载图稿 "+(parts.length+1)+" / "+manifest.parts.length+"，请稍候…";
-    if(!/^payload-\d{2}\.data$/.test(part.file)||!Number.isInteger(part.bytes)||part.bytes<=0||total+part.bytes>256*1024*1024)throw Error("图稿分包目录无效。");
-    const chunk=await fetch("./"+part.file+"?v=a225f038745713c8",options);
+    const chunk=await fetch("./"+part.file+"?v=1867ada63a121e38",options);
     if(!chunk.ok)throw Error("图稿分包加载失败，请稍后重试。");
-    const content=new Uint8Array(await chunk.arrayBuffer());
+    const content=await readDownload(chunk,loaded=>downloadProgress(total+loaded,expected));
     const digest=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",content)),b=>b.toString(16).padStart(2,"0")).join("");
     if(content.length!==part.bytes||digest!==part.sha256)throw Error("图稿分包校验失败，请刷新页面重试。");
     parts.push(content);total+=content.length;
@@ -111,12 +132,17 @@ async function unlockGallery(passphrase) {
   if(accessClosed)throw Error("本次访问已关闭。");encryptedPayload=bytes;
  }
  const payload=encryptedPayload;
+ downloadProgress(payload.length,payload.length);$("#load-stage").textContent="下载完成，正在解锁…";
+ $("#load-detail").textContent="图稿已加载完成，请稍候…";
  if(payload.length<50||new TextDecoder().decode(payload.slice(0,6))!=="BDGP1\0")throw Error("图稿包格式无效，请刷新页面。");
  const material=await crypto.subtle.importKey("raw",new TextEncoder().encode(passphrase),"PBKDF2",false,["deriveKey"]);
  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:payload.slice(6,22),iterations:600000,hash:"SHA-256"},material,{name:"AES-GCM",length:256},false,["decrypt"]);
  let plain;
  try{plain=await crypto.subtle.decrypt({name:"AES-GCM",iv:payload.slice(22,34),additionalData:payload.slice(0,22)},key,payload.slice(34));}
  catch{throw Error("验证密码不正确，或图稿包已更新。请核对密码后重试。");}
+ if(accessClosed)throw Error("本次访问已关闭。");
+ $("#load-stage").textContent="正在整理图稿…";
+ await new Promise(resolve=>setTimeout(resolve,0));
  const gallery=await unpackGallery(plain);
  if(accessClosed){releaseImages(gallery);throw Error("本次访问已关闭。");}return gallery;
 }
